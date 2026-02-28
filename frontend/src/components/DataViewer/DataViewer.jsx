@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './DataViewer.scss';
 
-// ── Single table preview ───────────────────────────────────────────────────────
+//  Single table preview 
 function TablePreview({ tableName, preview }) {
   const [expanded, setExpanded] = useState(true);
 
@@ -93,7 +93,7 @@ function TablePreview({ tableName, preview }) {
   );
 }
 
-// ── Main DataViewer ────────────────────────────────────────────────────────────
+//  Main DataViewer 
 export default function DataViewer({ tablePreviews }) {
   if (!tablePreviews || Object.keys(tablePreviews).length === 0) {
     return (

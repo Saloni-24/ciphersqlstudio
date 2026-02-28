@@ -8,7 +8,7 @@ const api = axios.create({
   headers: { 'Content-Type': 'application/json' },
 });
 
-// ── Assignments ────────────────────────────────────────────────────────────────
+//  Assignments 
 
 /** Fetch all active assignments (listing page) */
 export async function fetchAssignments() {
@@ -22,7 +22,7 @@ export async function fetchAssignment(id) {
   return res.data; // { assignment, tablePreviews }
 }
 
-// ── Query execution ────────────────────────────────────────────────────────────
+//  Query execution 
 
 /**
  * Execute a SQL query against the sandbox PostgreSQL.
@@ -35,7 +35,7 @@ export async function executeQuery(sql, assignmentId, sessionId) {
   return res.data; // { success, rows, fields, rowCount, error?, truncated }
 }
 
-// ── LLM Hints ──────────────────────────────────────────────────────────────────
+//  LLM Hint
 
 /**
  * Request a hint from the LLM.

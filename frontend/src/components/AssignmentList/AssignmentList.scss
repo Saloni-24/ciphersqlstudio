@@ -1,7 +1,7 @@
 @use '../../styles/partials/variables' as *;
 @use '../../styles/partials/mixins' as *;
 
-// ── Page layout ───────────────────────────────────────────────────────────────
+// Page layout 
 .assignment-list-page {
   min-height: calc(100vh - #{$nav-height});
 
@@ -126,7 +126,7 @@
   }
 }
 
-// ── Filter tabs ───────────────────────────────────────────────────────────────
+//  Filter tabs 
 .filter-tab {
   @include flex-gap($sp-2);
   @include btn-base;
@@ -160,7 +160,7 @@
   }
 }
 
-// ── Assignment card ───────────────────────────────────────────────────────────
+// Assignment card 
 .assignment-card {
   @include card;
   @include fade-in(350ms);
