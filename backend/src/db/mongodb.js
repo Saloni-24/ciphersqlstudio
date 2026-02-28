@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-// ── Connection ─────────────────────────────────────────────────────────────────
+// Connection 
 async function connectMongo() {
   const uri = process.env.MONGODB_URI;
   if (!uri) {
@@ -10,14 +10,14 @@ async function connectMongo() {
 
   try {
     await mongoose.connect(uri);
-    console.log('✅ MongoDB connected');
+    console.log(' MongoDB connected');
   } catch (err) {
-    console.error('❌ MongoDB connection failed:', err.message);
+    console.error(' MongoDB connection failed:', err.message);
     process.exit(1);
   }
 }
 
-// ── Assignment Schema ──────────────────────────────────────────────────────────
+//  Assignment Schema 
 const assignmentSchema = new mongoose.Schema(
   {
     title: { type: String, required: true, trim: true },
@@ -53,7 +53,7 @@ const assignmentSchema = new mongoose.Schema(
 
 const Assignment = mongoose.model('Assignment', assignmentSchema);
 
-// ── Attempt Schema (optional feature) ─────────────────────────────────────────
+//  Attempt Schema (optional feature) 
 const attemptSchema = new mongoose.Schema(
   {
     assignmentId: {
