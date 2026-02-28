@@ -16,7 +16,7 @@ const pool = new Pool({
   password: process.env.PG_PASSWORD,
 });
 
-// ── PostgreSQL: Create & populate sample tables ────────────────────────────────
+//  PostgreSQL: Create & populate sample tables 
 const pgSetup = `
 -- Assignment 1: Basic SELECT
 CREATE TABLE IF NOT EXISTS employees (
@@ -102,7 +102,7 @@ INSERT INTO students (name, grade, subject, year) VALUES
 ON CONFLICT DO NOTHING;
 `;
 
-// ── MongoDB: Sample assignments ────────────────────────────────────────────────
+// MongoDB: Sample assignments
 const sampleAssignments = [
   {
     title: 'The First Cipher — Basic SELECT',
@@ -201,31 +201,31 @@ Write a SQL query that:
 ];
 
 async function seed() {
-  console.log('🌱 Starting seed...\n');
+  console.log(' Starting seed...\n');
 
   // Seed PostgreSQL
-  console.log('📦 Setting up PostgreSQL sandbox tables...');
+  console.log(' Setting up PostgreSQL sandbox tables...');
   try {
     await pool.query(pgSetup);
-    console.log('✅ PostgreSQL tables created and populated.\n');
+    console.log(' PostgreSQL tables created and populated.\n');
   } catch (err) {
-    console.error('❌ PostgreSQL seed failed:', err.message);
+    console.error(' PostgreSQL seed failed:', err.message);
   }
 
   // Seed MongoDB
-  console.log('📋 Seeding MongoDB assignments...');
+  console.log(' Seeding MongoDB assignments...');
   try {
     await mongoose.connect(process.env.MONGODB_URI);
     await Assignment.deleteMany({}); // clear existing
     await Assignment.insertMany(sampleAssignments);
-    console.log(`✅ Inserted ${sampleAssignments.length} assignments into MongoDB.\n`);
+    console.log(` Inserted ${sampleAssignments.length} assignments into MongoDB.\n`);
   } catch (err) {
-    console.error('❌ MongoDB seed failed:', err.message);
+    console.error(' MongoDB seed failed:', err.message);
   }
 
   await pool.end();
   await mongoose.disconnect();
-  console.log('🎉 Seed complete!');
+  console.log(' Seed complete!');
   process.exit(0);
 }
 

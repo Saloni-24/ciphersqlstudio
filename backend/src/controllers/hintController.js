@@ -64,8 +64,8 @@ async function callLLM(systemPrompt, userPrompt) {
 }
 
 async function callGemini(systemPrompt, userPrompt) {
-  const apiKey = process.env.GEMINI_API_KEY || 'AIzaSyDQeH2zPAlO16_FdJFSKy7K1CmhA1O7WjE';
-  if (!apiKey) throw new Error('GEMINI_API_KEY is not configured.');
+ const apiKey = process.env.GEMINI_API_KEY;
+if (!apiKey) throw new Error('GEMINI_API_KEY not set in environment');
 
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${apiKey}`;
 

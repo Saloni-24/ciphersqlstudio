@@ -16,7 +16,7 @@ const MAX_ROWS = parseInt(process.env.MAX_RESULT_ROWS) || 500;
 async function executeQuery_handler(req, res, next) {
   const { sql, assignmentId, sessionId } = req.body;
 
-  // ── Validate input ──────────────────────────────────────────────────────────
+  // ── Validate input 
   if (!sql) {
     return res.status(400).json({ success: false, error: 'sql field is required.' });
   }
@@ -26,7 +26,7 @@ async function executeQuery_handler(req, res, next) {
     return res.status(400).json({ success: false, error: validation.reason });
   }
 
-  // ── Execute ─────────────────────────────────────────────────────────────────
+  // Execute
   let pgResult;
   let executionError = null;
 
@@ -36,7 +36,7 @@ async function executeQuery_handler(req, res, next) {
     executionError = err;
   }
 
-  // ── Persist attempt (best-effort, non-blocking) ─────────────────────────────
+  //  Persist attempt (best-effort, non-blocking)
   if (assignmentId && sessionId) {
     Attempt.create({
       assignmentId,
@@ -48,7 +48,7 @@ async function executeQuery_handler(req, res, next) {
     }).catch(() => {}); // fire-and-forget
   }
 
-  // ── Respond ─────────────────────────────────────────────────────────────────
+  // Respond 
   if (executionError) {
     // Surface a clean error message to the student — useful for learning
     const message = executionError.message || 'Query execution failed.';
