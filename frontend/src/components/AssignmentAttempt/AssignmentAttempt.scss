@@ -1,7 +1,7 @@
 @use '../../styles/partials/variables' as *;
 @use '../../styles/partials/mixins' as *;
 
-// ── Page wrapper ───────────────────────────────────────────────────────────────
+// Page wrapper 
 .attempt-page {
   display: flex;
   flex-direction: column;
@@ -19,7 +19,7 @@
     p { font-family: $font-display; font-size: $fs-sm; color: $clr-text-secondary; }
   }
 
-  // ── Top bar ──────────────────────────────────────────────────────────────
+  // Top bar 
   &__topbar {
     @include flex-between;
     gap: $sp-3;
@@ -57,7 +57,7 @@
     @include sm { font-size: $fs-base; }
   }
 
-  // ── Mobile tabs ──────────────────────────────────────────────────────────
+  //  Mobile tabs 
   &__mobile-tabs {
     display: flex;
     border-bottom: 1px solid $clr-border;
@@ -95,7 +95,7 @@
   }
 }
 
-// ── Main layout ────────────────────────────────────────────────────────────────
+// Main layout 
 .attempt-layout {
   flex: 1;
   min-height: 0;
@@ -108,7 +108,7 @@
     gap: 0;
   }
 
-  // ── Left column ───────────────────────────────────────────────────────
+  // Left column 
   &__left {
     display: none;
     flex-direction: column;
@@ -135,7 +135,7 @@
     }
   }
 
-  // ── Right column ──────────────────────────────────────────────────────
+  //  Right column 
   &__right {
     display: none;
     flex: 1;
@@ -153,7 +153,7 @@
     }
   }
 
-  // ── Individual panel sizing ────────────────────────────────────────────
+  // Individual panel sizing 
   &__panel {
     flex: 1;
     display: none;
@@ -212,7 +212,7 @@
   }
 }
 
-// ── Panel body variants ────────────────────────────────────────────────────────
+// Panel body variants 
 .panel {
   background: #0a0e14 !important;
   border-color: $clr-border !important;
@@ -236,7 +236,7 @@
   }
 }
 
-// ── Question body content ──────────────────────────────────────────────────────
+//  Question body content 
 .question-body {
   overflow-y: auto;
   padding: $sp-4;
@@ -287,7 +287,7 @@
   }
 }
 
-// ── Force visibility of all left panel text ────────────────────────────────────
+//  Force visibility of all left panel text 
 .attempt-layout__left {
   color: #e2eaf4;
 

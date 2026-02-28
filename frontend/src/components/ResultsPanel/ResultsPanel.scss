@@ -10,7 +10,7 @@
   border-radius: $radius-lg;
   border: 1px solid $clr-border;
 
-  // ── States ──────────────────────────────────────────────────────────────
+  // States
   &--loading,
   &--empty,
   &--no-rows {
@@ -42,7 +42,7 @@
     overflow: hidden;
   }
 
-  // ── Empty state ──────────────────────────────────────────────────────────
+  // Empty state 
   &__empty-icon {
     font-size: 2rem;
     opacity: 0.2;
@@ -58,7 +58,7 @@
     strong { color: $clr-text-primary; }
   }
 
-  // ── Error state ──────────────────────────────────────────────────────────
+  // Error state 
   &__error-header {
     margin-bottom: $sp-3;
   }
@@ -88,7 +88,7 @@
     line-height: $lh-loose;
   }
 
-  // ── Meta bar ─────────────────────────────────────────────────────────────
+  // Meta bar 
   &__meta {
     @include flex-gap($sp-4);
     padding: $sp-2 $sp-4;
@@ -108,7 +108,7 @@
     &--warn    { color: $clr-yellow; }
   }
 
-  // ── Table ─────────────────────────────────────────────────────────────────
+  //  Table 
   &__table-wrap {
     flex: 1;
     overflow: auto;

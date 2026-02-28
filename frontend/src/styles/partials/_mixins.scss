@@ -1,9 +1,7 @@
-// ─────────────────────────────────────────────────────────────────────────────
-// _mixins.scss — Reusable SCSS mixins
-// ─────────────────────────────────────────────────────────────────────────────
+
 @use 'variables' as *;
 
-// ── Breakpoint mixins (mobile-first) ─────────────────────────────────────────
+//  Breakpoint mixins (mobile-first) 
 @mixin sm {
   @media (min-width: #{$bp-sm}) { @content; }
 }
@@ -16,7 +14,7 @@
   @media (min-width: #{$bp-lg}) { @content; }
 }
 
-// ── Flex helpers ─────────────────────────────────────────────────────────────
+// Flex helpers 
 @mixin flex-center {
   display: flex;
   align-items: center;
@@ -35,27 +33,27 @@
   gap: $gap;
 }
 
-// ── Card / panel surface ─────────────────────────────────────────────────────
+// Card / panel surface 
 @mixin card($bg: $clr-bg-card) {
   background: $bg;
   border: 1px solid $clr-border;
   border-radius: $radius-lg;
 }
 
-// ── Accent glow border ───────────────────────────────────────────────────────
+// Accent glow border
 @mixin glow-border {
   border-color: $clr-border-focus;
   box-shadow: 0 0 0 3px $clr-accent-dim, $shadow-accent;
 }
 
-// ── Truncate text ────────────────────────────────────────────────────────────
+// Truncate text 
 @mixin truncate {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-// ── Scrollbar styling ────────────────────────────────────────────────────────
+// Scrollbar styling
 @mixin custom-scrollbar {
   &::-webkit-scrollbar { width: 6px; height: 6px; }
   &::-webkit-scrollbar-track { background: transparent; }
@@ -66,7 +64,7 @@
   }
 }
 
-// ── Button base ──────────────────────────────────────────────────────────────
+// Button base 
 @mixin btn-base {
   display: inline-flex;
   align-items: center;
@@ -90,7 +88,7 @@
   }
 }
 
-// ── Difficulty badge ─────────────────────────────────────────────────────────
+// Difficulty badge 
 @mixin difficulty-badge($color) {
   background: rgba($color, 0.12);
   color: $color;
@@ -104,7 +102,7 @@
   text-transform: uppercase;
 }
 
-// ── Focus ring (accessibility) ───────────────────────────────────────────────
+//  Focus ring (accessibility) 
 @mixin focus-ring {
   &:focus-visible {
     outline: 2px solid $clr-accent;
@@ -125,7 +123,7 @@
   border-radius: $radius-md;
 }
 
-// ── Fade-in animation ────────────────────────────────────────────────────────
+// Fade-in animation 
 @mixin fade-in($duration: 300ms, $delay: 0ms) {
   animation: fadeIn $duration ease $delay both;
 }

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { fetchAssignments } from '../../services/api';
 import './AssignmentList.scss';
 
-// ── Skeleton loader for assignment cards ─────────────────────────────────────
+//  Skeleton loader for assignment cards 
 function CardSkeleton() {
   return (
     <div className="assignment-card assignment-card--skeleton" aria-hidden="true">
@@ -15,7 +15,7 @@ function CardSkeleton() {
   );
 }
 
-// ── Single assignment card ─────────────────────────────────────────────────────
+//  Single assignment card 
 function AssignmentCard({ assignment, index }) {
   return (
     <Link
@@ -55,7 +55,7 @@ function AssignmentCard({ assignment, index }) {
   );
 }
 
-// ── Main listing page ──────────────────────────────────────────────────────────
+// Main listing page 
 export default function AssignmentList() {
   const [assignments, setAssignments] = useState([]);
   const [loading, setLoading] = useState(true);
