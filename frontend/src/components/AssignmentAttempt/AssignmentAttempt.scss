@@ -1,0 +1,301 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+
+// ── Page wrapper ───────────────────────────────────────────────────────────────
+.attempt-page {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - #{$nav-height});
+  overflow: hidden;
+
+  &--loading,
+  &--error {
+    @include flex-center;
+    flex-direction: column;
+    gap: $sp-6;
+    height: calc(100vh - #{$nav-height});
+    padding: $sp-8;
+
+    p { font-family: $font-display; font-size: $fs-sm; color: $clr-text-secondary; }
+  }
+
+  // ── Top bar ──────────────────────────────────────────────────────────────
+  &__topbar {
+    @include flex-between;
+    gap: $sp-3;
+    padding: $sp-3 $sp-4;
+    border-bottom: 1px solid $clr-border;
+    background: $clr-bg;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+
+    @include sm { padding: $sp-3 $sp-6; flex-wrap: nowrap; }
+  }
+
+  &__back {
+    flex-shrink: 0;
+    font-family: $font-display;
+    font-size: $fs-xs;
+    letter-spacing: 0.06em;
+  }
+
+  &__meta {
+    @include flex-gap($sp-3);
+    min-width: 0;
+    flex: 1;
+
+    @include sm { justify-content: center; }
+  }
+
+  &__title {
+    font-family: $font-display;
+    font-size: $fs-sm;
+    font-weight: $fw-bold;
+    color: #e2eaf4;
+    @include truncate;
+
+    @include sm { font-size: $fs-base; }
+  }
+
+  // ── Mobile tabs ──────────────────────────────────────────────────────────
+  &__mobile-tabs {
+    display: flex;
+    border-bottom: 1px solid $clr-border;
+    background: $clr-bg;
+    flex-shrink: 0;
+
+    @include md { display: none; }
+  }
+
+  &__mobile-tab {
+    @include flex-center;
+    flex-direction: column;
+    flex: 1;
+    gap: 2px;
+    padding: $sp-2 $sp-1;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: $clr-text-secondary;
+    font-family: $font-display;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    span:first-child { font-size: $fs-base; }
+
+    &:hover { color: #e2eaf4; }
+
+    &--active {
+      color: $clr-accent;
+      border-bottom-color: $clr-accent;
+    }
+  }
+}
+
+// ── Main layout ────────────────────────────────────────────────────────────────
+.attempt-layout {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  @include md {
+    flex-direction: row;
+    gap: 0;
+  }
+
+  // ── Left column ───────────────────────────────────────────────────────
+  &__left {
+    display: none;
+    flex-direction: column;
+    border-right: 1px solid $clr-border;
+    overflow: hidden;
+    background: #0a0e14 !important;
+
+    &--visible {
+      display: flex;
+    }
+
+    @include md {
+      display: flex;
+      width: 340px;
+      min-width: 260px;
+      max-width: 380px;
+      flex-shrink: 0;
+      overflow-y: auto;
+      @include custom-scrollbar;
+    }
+
+    @include lg {
+      width: 360px;
+    }
+  }
+
+  // ── Right column ──────────────────────────────────────────────────────
+  &__right {
+    display: none;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
+    min-width: 0;
+    overflow: hidden;
+
+    &--visible {
+      display: flex;
+    }
+
+    @include md {
+      display: flex;
+    }
+  }
+
+  // ── Individual panel sizing ────────────────────────────────────────────
+  &__panel {
+    flex: 1;
+    display: none;
+    overflow: hidden;
+
+    &--active {
+      display: flex;
+      flex-direction: column;
+    }
+
+    @include md {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &--question {
+      @include md {
+        flex: 0 0 auto;
+        max-height: 45%;
+        min-height: 200px;
+        overflow: hidden;
+        border-bottom: 1px solid $clr-border;
+      }
+    }
+
+    &--data {
+      @include md {
+        flex: 1;
+        min-height: 0;
+        overflow: hidden;
+        border-bottom: 1px solid $clr-border;
+      }
+    }
+
+    &--hints {
+      @include md {
+        flex: 0 0 auto;
+        min-height: 0;
+      }
+    }
+
+    &--editor {
+      @include md {
+        flex: 6;
+        min-height: 200px;
+        border-bottom: 1px solid $clr-border;
+      }
+    }
+
+    &--results {
+      @include md {
+        flex: 4;
+        min-height: 120px;
+      }
+    }
+  }
+}
+
+// ── Panel body variants ────────────────────────────────────────────────────────
+.panel {
+  background: #0a0e14 !important;
+  border-color: $clr-border !important;
+
+  &__body--flush {
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__hint-text {
+    font-size: $fs-xs;
+    font-family: $font-display;
+    letter-spacing: 0.06em;
+  }
+
+  &__header {
+    background: #0a0e14 !important;
+  }
+}
+
+// ── Question body content ──────────────────────────────────────────────────────
+.question-body {
+  overflow-y: auto;
+  padding: $sp-4;
+  @include custom-scrollbar;
+
+  &__text {
+    font-size: $fs-sm !important;
+    color: #e2eaf4 !important;
+    line-height: 1.8 !important;
+    white-space: pre-line;
+    opacity: 1 !important;
+
+    strong {
+      color: #00c8ff !important;
+      font-weight: 600;
+    }
+  }
+
+  &__expected {
+    margin-top: $sp-5;
+    padding-top: $sp-4;
+    border-top: 1px solid $clr-border;
+  }
+
+  &__expected-label {
+    font-family: $font-display;
+    font-size: $fs-xs;
+    color: #7a93b0;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: $sp-2;
+  }
+
+  &__expected-cols {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $sp-2;
+  }
+
+  &__col {
+    font-family: $font-code;
+    font-size: $fs-xs;
+    color: $clr-accent;
+    background: $clr-accent-dim;
+    border: 1px solid rgba($clr-accent, 0.2);
+    border-radius: $radius-sm;
+    padding: 2px $sp-2;
+  }
+}
+
+// ── Force visibility of all left panel text ────────────────────────────────────
+.attempt-layout__left {
+  color: #e2eaf4;
+
+  p, span, div, li {
+    opacity: 1 !important;
+  }
+
+  .panel__title {
+    color: #7a93b0 !important;
+  }
+}

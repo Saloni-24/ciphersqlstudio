@@ -1,0 +1,180 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+
+.data-viewer {
+  display: flex;
+  flex-direction: column;
+  gap: $sp-3;
+  height: 100%;
+  overflow-y: auto;
+  @include custom-scrollbar;
+
+  &--empty {
+    @include flex-center;
+    color: $clr-text-secondary;
+    font-size: $fs-sm;
+    height: 100%;
+  }
+}
+
+.table-preview {
+  @include card;
+  overflow: hidden;
+
+  &__header {
+    @include flex-between;
+    gap: $sp-3;
+    padding: $sp-3 $sp-4;
+    cursor: pointer;
+    background: $clr-bg;
+    border: none;
+    width: 100%;
+    text-align: left;
+    transition: background $transition-fast;
+
+    &:hover {
+      background: $clr-bg-hover;
+    }
+  }
+
+  &__name {
+    @include flex-gap($sp-2);
+    font-family: $font-code;
+    font-size: $fs-sm;
+    font-weight: $fw-semibold;
+    color: $clr-accent;
+    flex: 1;
+    min-width: 0;
+    @include truncate;
+  }
+
+  &__icon {
+    font-size: $fs-base;
+    flex-shrink: 0;
+    opacity: 0.6;
+  }
+
+  &__meta {
+    font-size: $fs-xs;
+    color: $clr-text-disabled;
+    font-family: $font-display;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  &__chevron {
+    color: $clr-text-disabled;
+    font-size: $fs-base;
+    transition: transform $transition-fast;
+    flex-shrink: 0;
+
+    &--up {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__body {
+    border-top: 1px solid $clr-border;
+    @include fade-in(200ms);
+  }
+
+  // Column schema list
+  &__schema {
+    padding: $sp-2 $sp-4 $sp-3;
+    display: flex;
+    flex-direction: column;
+    gap: $sp-1;
+    border-bottom: 1px solid $clr-border;
+  }
+
+  &__col {
+    @include flex-gap($sp-3);
+    font-size: $fs-xs;
+    font-family: $font-code;
+  }
+
+  &__col-name {
+    color: $clr-text-primary;
+    min-width: 80px;
+  }
+
+  &__col-type {
+    color: $clr-yellow;
+    opacity: 0.8;
+  }
+
+  &__col-flag {
+    font-size: 9px;
+    color: $clr-text-disabled;
+    letter-spacing: 0.06em;
+    border: 1px solid $clr-border;
+    border-radius: $radius-sm;
+    padding: 0 4px;
+  }
+
+  // Sample rows table
+  &__rows-wrap {
+    overflow-x: auto;
+    @include custom-scrollbar;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: $font-code;
+    font-size: $fs-xs;
+
+    thead th {
+      position: sticky;
+      top: 0;
+      background: $clr-bg-elevated;
+      color: $clr-text-secondary;
+      font-weight: $fw-semibold;
+      text-align: left;
+      padding: $sp-2 $sp-3;
+      border-bottom: 1px solid $clr-border;
+      white-space: nowrap;
+    }
+
+    tbody tr:hover td {
+      background: $clr-bg-hover;
+    }
+
+    td {
+      padding: $sp-1 $sp-3;
+      color: $clr-text-primary;
+      border-bottom: 1px solid rgba($clr-border, 0.4);
+      white-space: nowrap;
+      max-width: 140px;
+      @include truncate;
+      transition: background $transition-fast;
+    }
+  }
+
+  &__null {
+    color: $clr-text-disabled;
+    font-style: italic;
+  }
+
+  // Error variant
+  &--error {
+    .table-preview__header { cursor: default; }
+  }
+
+  &__error-tag {
+    font-size: $fs-xs;
+    color: $clr-red;
+    background: $clr-red-dim;
+    border-radius: $radius-sm;
+    padding: 1px $sp-2;
+  }
+
+  &__error-msg {
+    padding: $sp-3 $sp-4;
+    font-size: $fs-xs;
+    color: $clr-red;
+    font-family: $font-code;
+  }
+}

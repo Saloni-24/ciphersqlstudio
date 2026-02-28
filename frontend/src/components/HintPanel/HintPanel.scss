@@ -1,0 +1,100 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+
+.hint-panel {
+  display: flex;
+  flex-direction: column;
+  gap: $sp-4;
+  padding: $sp-4;
+  @include card;
+  height: 100%;
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: $sp-2;
+  }
+
+  &__title-row {
+    @include flex-gap($sp-2);
+  }
+
+  &__icon {
+    font-size: $fs-lg;
+    color: $clr-yellow;
+    filter: drop-shadow(0 0 6px rgba($clr-yellow, 0.5));
+  }
+
+  &__title {
+    font-family: $font-display;
+    font-size: $fs-base;
+    font-weight: $fw-bold;
+    color: $clr-text-primary;
+  }
+
+  &__count {
+    font-size: $fs-xs;
+    color: $clr-text-disabled;
+    font-family: $font-display;
+    margin-left: auto;
+  }
+
+  &__subtitle {
+    font-size: $fs-sm;
+    color: $clr-text-secondary;
+    line-height: $lh-normal;
+  }
+
+  &__hint-box {
+    background: $clr-yellow-dim;
+    border: 1px solid rgba($clr-yellow, 0.25);
+    border-radius: $radius-md;
+    overflow: hidden;
+    @include fade-in(250ms);
+  }
+
+  &__hint-label {
+    padding: $sp-2 $sp-3;
+    background: rgba($clr-yellow, 0.1);
+    border-bottom: 1px solid rgba($clr-yellow, 0.2);
+
+    span {
+      font-family: $font-display;
+      font-size: $fs-xs;
+      font-weight: $fw-bold;
+      color: $clr-yellow;
+      letter-spacing: 0.15em;
+    }
+  }
+
+  &__hint-text {
+    padding: $sp-3;
+    font-size: $fs-sm;
+    color: mix(#fff, #ffd166, 40%);
+    line-height: $lh-loose;
+  }
+
+  &__error {
+    background: $clr-red-dim;
+    border: 1px solid rgba($clr-red, 0.3);
+    border-radius: $radius-md;
+    color: $clr-red;
+    padding: $sp-3;
+    font-size: $fs-sm;
+    font-family: $font-code;
+  }
+
+  &__btn {
+    width: 100%;
+    justify-content: center;
+    padding: $sp-3;
+    font-size: $fs-sm;
+  }
+
+  &__disclaimer {
+    font-size: $fs-xs;
+    color: $clr-text-disabled;
+    text-align: center;
+    font-style: italic;
+  }
+}

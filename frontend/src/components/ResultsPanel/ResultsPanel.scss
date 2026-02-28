@@ -1,0 +1,172 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+
+.results-panel {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: $clr-bg-card;
+  border-radius: $radius-lg;
+  border: 1px solid $clr-border;
+
+  // ── States ──────────────────────────────────────────────────────────────
+  &--loading,
+  &--empty,
+  &--no-rows {
+    @include flex-center;
+    flex-direction: column;
+    gap: $sp-4;
+    color: $clr-text-secondary;
+    font-size: $fs-sm;
+    min-height: 160px;
+  }
+
+  &--loading {
+    gap: $sp-3;
+    p { font-family: $font-display; font-size: $fs-xs; letter-spacing: 0.1em; }
+  }
+
+  &--error {
+    padding: $sp-4;
+  }
+
+  &--no-rows {
+    .results-panel__check {
+      font-size: $fs-xl;
+      color: $clr-green;
+    }
+  }
+
+  &--success {
+    overflow: hidden;
+  }
+
+  // ── Empty state ──────────────────────────────────────────────────────────
+  &__empty-icon {
+    font-size: 2rem;
+    opacity: 0.2;
+    color: $clr-accent;
+  }
+
+  &__empty-text {
+    text-align: center;
+    font-size: $fs-sm;
+    line-height: $lh-loose;
+    max-width: 300px;
+
+    strong { color: $clr-text-primary; }
+  }
+
+  // ── Error state ──────────────────────────────────────────────────────────
+  &__error-header {
+    margin-bottom: $sp-3;
+  }
+
+  &__error-badge {
+    font-family: $font-display;
+    font-size: $fs-xs;
+    font-weight: $fw-bold;
+    letter-spacing: 0.15em;
+    color: $clr-red;
+    background: $clr-red-dim;
+    border: 1px solid rgba($clr-red, 0.3);
+    border-radius: $radius-sm;
+    padding: 2px $sp-2;
+  }
+
+  &__error-message {
+    font-family: $font-code;
+    font-size: $fs-sm;
+    color: $clr-red;
+    background: $clr-red-dim;
+    border: 1px solid rgba($clr-red, 0.2);
+    border-radius: $radius-md;
+    padding: $sp-4;
+    white-space: pre-wrap;
+    word-break: break-word;
+    line-height: $lh-loose;
+  }
+
+  // ── Meta bar ─────────────────────────────────────────────────────────────
+  &__meta {
+    @include flex-gap($sp-4);
+    padding: $sp-2 $sp-4;
+    border-bottom: 1px solid $clr-border;
+    background: $clr-bg;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+  }
+
+  &__meta-item {
+    font-family: $font-display;
+    font-size: $fs-xs;
+    font-weight: $fw-bold;
+    letter-spacing: 0.08em;
+
+    &--success { color: $clr-green; }
+    &--warn    { color: $clr-yellow; }
+  }
+
+  // ── Table ─────────────────────────────────────────────────────────────────
+  &__table-wrap {
+    flex: 1;
+    overflow: auto;
+    @include custom-scrollbar;
+  }
+}
+
+// Results table
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: $font-code;
+  font-size: $fs-sm;
+
+  &__th {
+    position: sticky;
+    top: 0;
+    background: $clr-bg;
+    color: $clr-accent;
+    font-weight: $fw-bold;
+    font-size: $fs-xs;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-align: left;
+    padding: $sp-3 $sp-4;
+    border-bottom: 1px solid $clr-border;
+    white-space: nowrap;
+    z-index: 1;
+  }
+
+  &__row {
+    &:hover td {
+      background: $clr-bg-hover;
+    }
+
+    &:nth-child(even) td {
+      background: rgba($clr-bg-elevated, 0.5);
+    }
+
+    &:hover:nth-child(even) td,
+    &:hover:nth-child(odd) td {
+      background: $clr-bg-hover;
+    }
+  }
+
+  &__td {
+    padding: $sp-2 $sp-4;
+    color: $clr-text-primary;
+    border-bottom: 1px solid rgba($clr-border, 0.5);
+    white-space: nowrap;
+    max-width: 280px;
+    @include truncate;
+    transition: background $transition-fast;
+  }
+
+  &__null {
+    color: $clr-text-disabled;
+    font-style: italic;
+    font-size: $fs-xs;
+  }
+}

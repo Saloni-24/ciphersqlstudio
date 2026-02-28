@@ -1,0 +1,250 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+
+// ── Page layout ───────────────────────────────────────────────────────────────
+.assignment-list-page {
+  min-height: calc(100vh - #{$nav-height});
+
+  &__hero {
+    position: relative;
+    overflow: hidden;
+    padding: $sp-12 $sp-4 $sp-10;
+    background: $clr-bg;
+    text-align: center;
+    border-bottom: 1px solid $clr-border;
+
+    @include sm  { padding: $sp-16 $sp-6 $sp-12; }
+    @include md  { padding: $sp-16 $sp-8 $sp-12; }
+  }
+
+  &__hero-inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__grid-bg {
+    // Terminal grid background
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba($clr-accent, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba($clr-accent, 0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+
+    // Fade edges
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, transparent 40%, $clr-bg 80%);
+    }
+  }
+
+  &__label {
+    font-family: $font-display;
+    font-size: $fs-xs;
+    font-weight: $fw-bold;
+    color: $clr-accent;
+    letter-spacing: 0.25em;
+    margin-bottom: $sp-4;
+    opacity: 0.8;
+  }
+
+  &__heading {
+    font-family: $font-display;
+    font-size: $fs-2xl;
+    font-weight: $fw-bold;
+    color: $clr-text-primary;
+    line-height: $lh-tight;
+    margin-bottom: $sp-4;
+
+    @include sm  { font-size: $fs-3xl; }
+    @include md  { font-size: 3.5rem; }
+  }
+
+  &__heading-accent {
+    color: $clr-accent;
+    text-shadow: 0 0 30px $clr-accent-glow;
+  }
+
+  &__subheading {
+    font-size: $fs-base;
+    color: $clr-text-secondary;
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: $lh-loose;
+
+    @include sm { font-size: $fs-md; }
+  }
+
+  &__filters {
+    border-bottom: 1px solid $clr-border;
+    background: $clr-bg;
+    position: sticky;
+    top: $nav-height;
+    z-index: 50;
+  }
+
+  &__filters-inner {
+    @include flex-gap($sp-1);
+    max-width: $max-content-width;
+    margin: 0 auto;
+    padding: $sp-3 $sp-4;
+    overflow-x: auto;
+
+    @include sm { padding: $sp-3 $sp-6; }
+
+    &::-webkit-scrollbar { display: none; }
+    scrollbar-width: none;
+  }
+
+  &__content {
+    max-width: $max-content-width;
+    margin: 0 auto;
+    padding: $sp-8 $sp-4;
+
+    @include sm { padding: $sp-8 $sp-6; }
+    @include md { padding: $sp-10 $sp-8; }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $sp-4;
+
+    @include sm  { grid-template-columns: repeat(2, 1fr); }
+    @include md  { grid-template-columns: repeat(2, 1fr); gap: $sp-6; }
+    @include lg  { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  &__empty {
+    @include flex-center;
+    min-height: 200px;
+    color: $clr-text-secondary;
+    font-family: $font-display;
+  }
+}
+
+// ── Filter tabs ───────────────────────────────────────────────────────────────
+.filter-tab {
+  @include flex-gap($sp-2);
+  @include btn-base;
+  font-family: $font-display;
+  font-size: $fs-xs;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: transparent;
+  color: $clr-text-secondary;
+  border-color: transparent;
+  padding: $sp-2 $sp-4;
+  white-space: nowrap;
+
+  &:hover {
+    color: $clr-text-primary;
+    background: $clr-bg-hover;
+  }
+
+  &--active {
+    color: $clr-accent;
+    background: $clr-accent-dim;
+    border-color: rgba($clr-accent, 0.2);
+  }
+
+  &__count {
+    background: $clr-bg-elevated;
+    border-radius: $radius-pill;
+    padding: 1px 6px;
+    font-size: 10px;
+    color: $clr-text-secondary;
+  }
+}
+
+// ── Assignment card ───────────────────────────────────────────────────────────
+.assignment-card {
+  @include card;
+  @include fade-in(350ms);
+  display: flex;
+  flex-direction: column;
+  gap: $sp-3;
+  padding: $sp-5;
+  text-decoration: none;
+  transition: transform $transition-normal, border-color $transition-normal, box-shadow $transition-normal;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-3px);
+    border-color: rgba($clr-accent, 0.4);
+    box-shadow: $shadow-md, 0 0 20px rgba($clr-accent, 0.08);
+
+    .assignment-card__arrow {
+      transform: translateX(4px);
+    }
+
+    .assignment-card__title {
+      color: $clr-accent;
+    }
+  }
+
+  &--skeleton {
+    pointer-events: none;
+    cursor: default;
+
+    &:hover {
+      transform: none;
+      border-color: $clr-border;
+      box-shadow: none;
+    }
+  }
+
+  &__header {
+    @include flex-between;
+  }
+
+  &__order {
+    font-family: $font-display;
+    font-size: $fs-xs;
+    color: $clr-text-disabled;
+    letter-spacing: 0.1em;
+  }
+
+  &__title {
+    font-family: $font-display;
+    font-size: $fs-base;
+    font-weight: $fw-bold;
+    color: $clr-text-primary;
+    line-height: $lh-tight;
+    transition: color $transition-fast;
+
+    @include sm { font-size: $fs-md; }
+  }
+
+  &__desc {
+    font-size: $fs-sm;
+    color: $clr-text-secondary;
+    line-height: $lh-normal;
+    flex: 1;
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $sp-2;
+  }
+
+  &__cta {
+    @include flex-gap($sp-2);
+    margin-top: $sp-2;
+    font-family: $font-display;
+    font-size: $fs-xs;
+    font-weight: $fw-bold;
+    color: $clr-accent;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  &__arrow {
+    transition: transform $transition-fast;
+    display: inline-block;
+  }
+}
