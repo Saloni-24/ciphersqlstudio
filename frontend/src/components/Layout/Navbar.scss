@@ -1,0 +1,101 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: $nav-height;
+  background: rgba($clr-bg, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid $clr-border;
+
+  &__inner {
+    @include flex-between;
+    max-width: $max-content-width;
+    margin: 0 auto;
+    padding: 0 $sp-4;
+    height: 100%;
+
+    @include sm {
+      padding: 0 $sp-6;
+    }
+  }
+
+  &__brand {
+    @include flex-gap($sp-2);
+    text-decoration: none;
+    
+    &:hover .navbar__brand-text {
+      color: $clr-accent;
+    }
+  }
+
+  &__brand-icon {
+    font-size: $fs-xl;
+    color: $clr-accent;
+    line-height: 1;
+    filter: drop-shadow(0 0 6px $clr-accent-glow);
+  }
+
+  &__brand-text {
+    font-family: $font-display;
+    font-size: $fs-base;
+    font-weight: $fw-bold;
+    color: $clr-text-primary;
+    letter-spacing: -0.02em;
+    transition: color $transition-fast;
+
+    @include sm {
+      font-size: $fs-md;
+    }
+  }
+
+  &__brand-accent {
+    color: $clr-accent;
+  }
+
+  &__links {
+    @include flex-gap($sp-4);
+  }
+
+  &__link {
+    font-family: $font-display;
+    font-size: $fs-xs;
+    font-weight: $fw-bold;
+    color: $clr-text-secondary;
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: $sp-1 $sp-3;
+    border-radius: $radius-md;
+    transition: all $transition-fast;
+
+    &:hover,
+    &--active {
+      color: $clr-accent;
+      background: $clr-accent-dim;
+    }
+  }
+
+  &__status {
+    @include flex-gap($sp-2);
+  }
+
+  &__dot {
+    width: 7px;
+    height: 7px;
+    background: $clr-green;
+    border-radius: 50%;
+    box-shadow: 0 0 6px $clr-green;
+    animation: pulse 2s ease infinite;
+  }
+
+  &__status-text {
+    font-family: $font-display;
+    font-size: $fs-xs;
+    font-weight: $fw-bold;
+    color: $clr-green;
+    letter-spacing: 0.15em;
+  }
+}

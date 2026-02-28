@@ -1,0 +1,74 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// _reset.scss — Minimal reset + base element styles
+// ─────────────────────────────────────────────────────────────────────────────
+@use 'variables' as *;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: $font-body;
+  font-size: $fs-base;
+  font-weight: $fw-normal;
+  line-height: $lh-normal;
+  color: $clr-text-primary;
+  background-color: $clr-bg;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img,
+video {
+  max-width: 100%;
+  display: block;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+button {
+  font-family: inherit;
+  background: none;
+  border: none;
+}
+
+input,
+textarea,
+select {
+  font-family: inherit;
+}
+
+a {
+  color: $clr-accent;
+  text-decoration: none;
+}
+
+code,
+pre,
+kbd {
+  font-family: $font-code;
+}
+
+// Smooth scrollbar on scrollable regions
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: $clr-border;
+  border-radius: $radius-pill;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: $clr-text-disabled;
+}
