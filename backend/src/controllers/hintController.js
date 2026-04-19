@@ -146,11 +146,30 @@ async function getHint(req, res, next) {
 
     res.json({ success: true, hint });
   } catch (err) {
-    // Don't crash the server on LLM failures — surface a friendly error
-    console.error('LLM hint error:', err.message);
-    res.status(503).json({
+    // Don't crash the server on LLM failures — surface actionable errors.
+    const message = String(err?.message || 'Unknown hint provider error');
+    console.error('LLM hint error:', message);
+
+    // Provider quota/rate-limit exhaustion.
+    if (message.includes('429') || /quota|rate limit/i.test(message)) {
+      return res.status(429).json({
+        success: false,
+        error: 'Hint quota exceeded for the configured LLM provider. Add billing/credits or switch provider key in backend/.env.',
+      });
+    }
+
+    // Invalid or missing API credentials.
+    if (/API key|not set|401|403|unauthorized|forbidden/i.test(message)) {
+      return res.status(401).json({
+        success: false,
+        error: 'Hint provider credentials are invalid or missing. Update LLM_PROVIDER and API keys in backend/.env.',
+      });
+    }
+
+    // Generic upstream outage/provider error.
+    return res.status(503).json({
       success: false,
-      error: 'Hint service is temporarily unavailable. Check your API key configuration.',
+      error: 'Hint service is temporarily unavailable due to an upstream provider error.',
     });
   }
 }
