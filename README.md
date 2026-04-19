@@ -8,9 +8,9 @@ CipherSQL Studio is a full-stack SQL learning platform where students solve real
 
 ##  Live Demo
 
-- **Frontend:** http://localhost:3000
-- **Backend API:** http://localhost:5000/api
-- **Health Check:** http://localhost:5000/api/health
+- **Frontend:** https://ciphersqlstudio-black.vercel.app
+- **Backend :** https://ciphersqlstudio-pkoh.onrender.com
+
 
 ---
 
