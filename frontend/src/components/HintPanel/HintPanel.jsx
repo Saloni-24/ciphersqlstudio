@@ -27,7 +27,8 @@ export default function HintPanel({ question, currentSql, lastError, tables }) {
         setError(result.error || 'Failed to get hint.');
       }
     } catch (err) {
-      setError('Hint service unavailable. Check your API key configuration.');
+      const apiError = err?.response?.data?.error;
+      setError(apiError || 'Hint service unavailable. Check your API key configuration.');
     } finally {
       setLoading(false);
     }
